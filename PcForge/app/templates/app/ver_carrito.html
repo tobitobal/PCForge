@@ -1,0 +1,95 @@
+{% extends 'app/base.html' %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% block contenido %}
+  <div class="container ver_carrito">
+    <br>
+    <div class="card">
+      <div class="card-body">
+        <h1>Tu carrito de compras</h1>
+        <form method="post" action="{% url 'ver_carrito' %}">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="btn btn-primary">Actualizar Carrito</button>
+      </form>
+      <p>¿Desea retirar en tienda?</p>
+      <input type="checkbox" id="cbox2" value="second_checkbox" />
+        <table class="table table-striped table-hover table-responsive-sm">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Precio unitario</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in items %}
+            <tr>
+              <td>{{ item.producto.nombre }}</td>
+              <td>{{ item.cantidad }}</td>
+              <td>${{ item.producto.precio | intcomma }}</td>
+              <td>
+                <a href="{% url 'quitar_del_carrito' item.id %}" class="btn btn-danger">Quitar del carrito</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        <p>Total: ${{ carrito.total | intcomma }}</p>
+
+        
+
+        <div class="text-center">
+
+          {% if request.user.is_superuser %}
+      
+      
+          <form action="{% url 'procesar_pago_carrito' %}" method="post" class="d-inline">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success">Pagar</button>
+          </form>
+          
+      
+      
+          {% elif is_soporte %}
+      
+          <form action="{% url 'procesar_pago_carrito' %}" method="post" class="d-inline">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success">Pagar</button>
+          </form>
+          
+      
+          {% elif is_vendedor %}
+      
+                        
+          <form action="{% url 'procesar_pago_carrito' %}" method="post" class="d-inline">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success">Pagar</button>
+          </form>
+      
+          {% elif is_cliente %}
+      
+      
+          <form method="post" action="{% url 'iniciar_pago_componentes' %}">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-warning">Pagar con paypal</button>
+          </form>
+          
+      
+          {% endif %}
+      
+
+          &nbsp; 
+          <br>
+
+          <a href="{% url 'productos' %}" class="btn btn-dark">Seguir comprando</a>
+       
+      </div>
+
+
+
+    </div>
+  </div>
+{% endblock %}

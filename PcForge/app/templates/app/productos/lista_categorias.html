@@ -1,0 +1,10 @@
+{% extends 'app/base.html' %}
+
+{% block contenido %}
+    <h1>Seleccione una categoría:</h1>
+    <ul>
+        {% for categoria in categorias %}
+            <li><a href="{% url 'productos_por_categoria' categoria.categoria %}">{{ categoria.categoria }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

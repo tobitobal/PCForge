@@ -1,0 +1,46 @@
+{% extends 'app/base.html' %}
+{% load humanize %}
+{% block contenido %}
+
+<div class="container wishlist">
+    <br>
+    <div class="card">
+      <div class="card-body">
+  <h2 class="text-center mb-4">Lista de Deseos</h2>
+
+  {% if wishlist.productos.all %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Producto</th>
+          <th scope="col">Acciones</th>
+          <th scope="col">Precio</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for producto in wishlist.productos.all %}
+          <tr>
+            <td>{{ producto.nombre }}</td>
+            <td>
+              <a href="{% url 'quitar_de_wishlist' producto.id %}" class="btn btn-danger btn-sm">Quitar</a>
+            </td>
+            <td>${{ producto.precio | intcomma }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p class="text-center">Tu lista de deseos está vacía.</p>
+  {% endif %}
+  <tr>
+    <td>
+    <a href="{% url 'productos' %}" class="btn btn-primary">Seguir agregando</a>
+    <td>
+    <td>
+    <a href="{% url 'home' %}" class="btn btn-primary">Volver al inicio</a>
+    </td>
+</div>
+</div>
+</div>
+
+{% endblock %}

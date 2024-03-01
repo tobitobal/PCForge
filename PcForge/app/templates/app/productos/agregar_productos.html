@@ -1,0 +1,64 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block contenido %}
+    <div class="row">
+        <div class="col-12 col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Nuevo Producto</h2>
+                    <hr>
+                    <!-- Formulario de AdminLTE -->
+                    <!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                      <meta charset="utf-8">
+                      <meta name="viewport" content="width=device-width, initial-scale=1">
+                      <title>AdminLTE 3 | General Form Elements</title>
+
+                      <!-- Google Font: Source Sans Pro -->
+                      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+                      <!-- Font Awesome -->
+                      <link rel="stylesheet" href="{% static 'adminlte/plugins/fontawesome-free/css/all.min.css' %}">
+                      <!-- Theme style -->
+                      <link rel="stylesheet" href="{% static 'adminlte/css/adminlte.min.css' %}">
+                    </head>
+                    <body class="hold-transition sidebar-mini">
+                    <div class="wrapper">
+                      <!-- Contenido del formulario aquí -->
+                      <form action="" method="post" enctype="multipart/form-data">
+                          {% csrf_token %}
+                          {{ form | crispy }}
+                          <div class="d-flex justify-content-end">
+                              <input type="reset" value="Cancelar" class="btn btn-warning">
+                              &nbsp;
+                              <input type="submit" value="Guardar" class="btn btn-primary">
+                          </div>
+                      </form>
+                      <!-- Fin del contenido del formulario -->
+                    </div>
+                    <!-- jQuery -->
+                    <script src="{% static 'adminlte/plugins/jquery/jquery.min.js' %}"></script>
+                    <!-- Bootstrap 4 -->
+                    <script src="{% static 'adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+                    <!-- bs-custom-file-input -->
+                    <script src="{% static 'adminlte/plugins/bs-custom-file-input/bs-custom-file-input.min.js' %}"></script>
+                    <!-- AdminLTE App -->
+                    <script src="{% static 'adminlte/js/adminlte.min.js' %}"></script>
+                    <!-- AdminLTE for demo purposes -->
+                    <script src="{% static 'adminlte/js/demo.js' %}"></script>
+                    <!-- Page specific script -->
+                    <script>
+                    $(function () {
+                      bsCustomFileInput.init();
+                    });
+                    </script>
+                    </body>
+                    </html>
+                    <!-- Fin del formulario de AdminLTE -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

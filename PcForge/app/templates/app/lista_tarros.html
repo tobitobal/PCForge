@@ -1,0 +1,19 @@
+{% extends 'app/base.html' %}
+
+{% block contenido %}
+<div class="container lista_tarros">
+    <h1 class="mb-4">Listado de Tarros</h1>
+    <div class="list-group">
+        {% for tarro in tarros %}
+            <div class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ tarro.id }}</h5>
+                    <small>{{ tarro.fecha_creacion }}</small>
+                </div>
+                <p class="mb-1">Usuario: {{ tarro.usuario.username }}</p>
+                <a href="{% url 'detalle_tarro' tarro.id %}" class="btn btn-primary btn-sm">Ver Detalles</a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,151 @@
+/* Reset de márgenes y padding */
+.product-box {
+    width: 200px; 
+    height: 250px; 
+    border: 1px;
+    margin: 10px; 
+    float: left; 
+  }
+/* Estilo general */
+body {
+    background-image: url(../img/foto_porta.jpg); /* Color de fondo */
+    color: #343a40; /* Color de texto principal */
+    font-family: 'Arial', sans-serif;
+}
+
+footer {
+    background-color: rgb(108, 183, 233);
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+/* Contenedor principal */
+.main-content {
+    padding: 131.8px 0;
+    
+}
+
+/* Jumbotron */
+.jumbotron {
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+
+
+
+
+
+/* Encabezados y texto principal */
+.display-4, .lead, h3, h5, p {
+    color: #343a40; /* Color de texto principal */
+}
+
+/* Botones */
+.btn-primary {
+    background-color: #007bff; /* Color de fondo del botón primario */
+    border-color: #007bff; /* Color del borde del botón primario */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Cambia el color de fondo al pasar el ratón sobre el botón primario */
+    border-color: #0056b3; /* Cambia el color del borde al pasar el ratón sobre el botón primario */
+}
+
+/* Precio */
+.price {
+    font-weight: bold;
+    color: #28a745; /* Color verde para el precio */
+}
+
+/* Feature Box (contenedor de productos) */
+.feature-box {
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Imagen de producto */
+.feature-box img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Detalles del botón */
+.feature-box .btn-primary {
+    border-radius: 5px;
+}
+
+/* Añadir espacio entre las filas de productos */
+.row:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+/* Listar productos*/
+.container.lis_productos {
+    margin-bottom: 427px !important; 
+}
+
+/* wishlist*/
+.container.wishlist {
+    margin-bottom: 615px !important; 
+}
+
+/* carrito_ver*/
+.container.ver_carrito {
+    margin-bottom: 526px !important; 
+}
+/* contacto*/
+.container.contacto {
+    margin-bottom: 200px !important; 
+}
+
+/* lista_tarros*/
+.container.lista_tarros {
+    margin-bottom: 82px !important; 
+}
+
+/* crear_tarro*/
+.container.crear_tarro {
+    margin-bottom: 335.5px !important; 
+}
+/* detalle_tarro*/
+.container.detalle_tarro {
+    margin-bottom: 589px !important; 
+}
+/* pedidos_global*/
+.container.pedidos_global {
+    margin-bottom: 348px !important; 
+}
+
+/* pedidos_global*/
+.container.ver_pedidos {
+    margin-bottom: 693px !important; 
+}
+/* ver_perfil*/
+.container.ver_perfil {
+    margin-bottom: 439px !important; 
+}
+/* modificar_perfil*/
+.container.modificar_perfil {
+    margin-bottom: 80px !important; 
+}
+/* ver_perfil*/
+.container.ver_perfil {
+    margin-bottom: 439px !important; 
+}
+
+
+.pedido-background {
+    background-color: #f0f0f0; /* Cambia el color de fondo según tus preferencias */
+    padding: 20px; /* Ajusta el relleno según sea necesario */
+    border-radius: 20px; /* Opcional: agrega bordes redondeados */
+}
+

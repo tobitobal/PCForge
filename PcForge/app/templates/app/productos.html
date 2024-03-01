@@ -1,0 +1,45 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% block contenido %}
+<div class="container main-content">
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <form method="get" action="{% url 'productos' %}">
+                        {{ form | crispy }}
+                        <button class="btn btn-secondary btn-sm" type="submit">Buscar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        {% for p in productos %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img src="{% if p.imagen %}{{ p.imagen.url }}{% else %}{% static 'app/placeholder.jpg' %}{% endif %}" class="card-img-top img-fluid producto-imagen" alt="{{ p.nombre }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ p.nombre | title | truncatechars:40 }}</h5>
+                    <p class="card-text">{{ p.marca }}</p>
+                    <p class="card-text price">${{ p.precio | intcomma }}</p>
+                    <p class="card-text description">{{ p.descripcion | truncatechars:100 }}</p>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'detalle_producto' p.id %}" class="btn btn-primary btn-sm">Ver detalles</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<style>
+    .producto-imagen { /* Estilo para las imágenes de producto */
+        height: 200px; /* Altura fija para todas las imágenes */
+        object-fit: contain; /* Ajuste de la imagen para contener el contenedor sin distorsión ni recorte */
+    }
+</style>
+{% endblock %}

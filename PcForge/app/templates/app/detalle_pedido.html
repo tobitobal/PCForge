@@ -1,0 +1,44 @@
+{% extends 'app/base.html' %}
+
+
+
+
+{% block contenido %}
+    <div class="container mt-4">
+        <h2 class="mb-4">Detalle del Pedido #{{ pedido.id }}</h2>
+        
+        <div class="card">
+            <div class="card-body">
+                <p><strong>Estado:</strong> {{ pedido.get_estado_display }}</p>
+                <p><strong>Fecha de Creación:</strong> {{ pedido.fecha_creacion }}</p>
+                <p><strong>Dirección de Entrega:</strong> {{ pedido.direccion_entrega }}</p>
+                
+                <h3 class="mt-3">Productos y Detalles:</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for detalle in pedido.detallepedido_set.all %}
+                            <tr>
+                                <td>{{ detalle.producto.nombre }}</td>
+                                <td>{{ detalle.cantidad }}</td>
+                               
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                
+         
+                
+                {# Puedes agregar más detalles según sea necesario #}
+                
+                <a href="{% url 'ver_pedidos' %}" class="btn btn-primary">Volver a la lista de pedidos</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

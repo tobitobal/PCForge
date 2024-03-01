@@ -1,0 +1,26 @@
+{% extends 'app/base.html' %}
+
+{% load crispy_forms_tags %}
+{% load humanize %}
+
+{% block contenido %}
+
+  <div class="container">
+    <h2>Confirmación de Pago</h2>
+    <p>Gracias por tu compra. A continuación, te presentamos los detalles de tu boleta:</p>
+
+    <p><strong>Boleta No:</strong> {{ boleta.id }}</p>
+    <p><strong>Fecha de Compra:</strong> {{ boleta.fecha_creacion }}</p>
+    <p><strong>Descuento:</strong> {{ carrito.descuento }}</p>
+    <p><strong>Valor Total:</strong> ${{ boleta.valor_total }}</p>
+
+    <h3>Detalles de la Boleta:</h3>
+    <ul>
+      {% for detalle in boleta.detalles_boleta.all %}
+        <li>{{ detalle.producto.nombre }} - Cantidad: {{ detalle.cantidad }} - Subtotal: ${{ detalle.calcular_subtotal }}</li>
+      {% endfor %}
+    </ul>
+
+    <p><a href="{% url 'home' %}" class="btn btn-primary">Volver a la Tienda</a></p>
+  </div>
+{% endblock %}

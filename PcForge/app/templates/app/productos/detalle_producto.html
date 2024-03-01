@@ -1,0 +1,88 @@
+<!-- templates/detalle_producto.html -->
+{% extends 'app/base.html' %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% block contenido %}
+<div class="container mt-4">
+    <div class="feature-box">
+        <div class="card-body">
+            <h1>Detalles del Producto</h1>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="{{ producto.imagen.url }}" class="img-fluid" alt="{{ producto.nombre }}">
+                </div>
+                <div class="col-md-6">
+                    <h2>{{ producto.nombre | title }}</h2>
+                    <p class="price">Precio: ${{ producto.precio | intcomma }}</p>
+                    <p>Marca: {{ producto.marca }}</p>
+                    <p>¿Es nuevo? {% if producto.nuevo %}Si{% else %}No{% endif %}</p>
+                    <p>Version: {{ producto.version }}</p>
+                    <p>Stock disponible: {{ producto.stock }}</p>
+                    <p>Categoría: {{ producto.categoria }}</p>
+                    <p>Fecha de fabricación: {{ producto.fecha_fabricacion }}</p>
+
+                    <h3>Descripción:</h3>
+                    <p>{{ producto.descripcion }}</p>
+
+                    <!-- Puedes agregar más detalles según tus necesidades -->
+
+                    <!-- Formulario para agregar al carrito de Armar PC -->
+                    <form method="post" action="{% url 'agregar_al_carrito' producto.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary" {% if not producto.activo %}disabled{% endif %}>
+                            {% if not producto.activo %}Proximamente{% else %}Agregar al Carrito{% endif %}
+                        </button>
+                    </form>
+                    <br>
+                    <form method="post" action="{% url 'agregar_al_carrito_armar_pc' producto.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary" {% if not producto.activo %}disabled{% endif %}>
+                            {% if not producto.activo %}Proximamente{% else %}Arma Tu PC{% endif %}
+                        </button>
+                    </form>
+
+                    <br>
+                    <form method="post" action="{% url 'agregar_a_wishlist' producto.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary" {% if not producto.activo %}disabled{% endif %}>
+                            {% if not producto.activo %}Proximamente{% else %}Agregar a Wishlist{% endif %}
+                        </button>
+                    </form>
+                    <!-- Repite el formulario para cada categoría según tus necesidades -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <div class="card mb-3">
+            <div class="card-body">
+                <h3 class="card-title">Comentarios</h3>
+                {% for comentario in producto.comentario_set.all %}
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <p class="card-text"><strong>{{ comentario.cliente.username }}</strong> - {{ comentario.fecha_creacion }}</p>
+                            <p class="card-text">Evaluación: {{ comentario.evaluacion }}/5</p>
+                            <p class="card-text">{{ comentario.contenido }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <h3 class="card-title">Deja un Comentario</h3>
+                <form method="post" action="{% url 'detalle_producto' producto.id %}">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    <button type="submit" class="btn btn-primary">Enviar Comentario</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

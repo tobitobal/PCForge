@@ -1,0 +1,19 @@
+{% extends 'app/base.html' %}
+
+{% block contenido %}
+<div class="container detalle_tarro">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">Detalles del Tarro {{ tarro.id }}</h2>
+
+            <div class="card-text">
+                <p class="mb-1"><strong>Usuario:</strong> {{ tarro.usuario.username }}</p>
+                <p class="mb-1"><strong>Fecha de Creación:</strong> {{ tarro.fecha_creacion }}</p>
+                <!-- Puedes agregar más detalles según tus necesidades -->
+            </div>
+            
+            <a href="{% url 'lista_tarros' %}" class="btn btn-primary mt-3">Volver al Listado de Tarros</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

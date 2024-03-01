@@ -1,0 +1,197 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block contenido %}
+
+  {% csrf_token %}
+
+  <!-- Contenedor 1 -->
+  <div class="container main-content">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="jumbotron">
+                  <div class="welcome-section">
+                      <h1 class="display-4">¡Bienvenido {{ user.username }} a Nuestra Tienda Pc Forge!</h1>
+                  </div>
+
+                  {% if request.user.is_superuser %}
+
+                  <div class="explore-section">
+                    <p class="lead">Ten una Buena Jornada Laboral</p>
+                </div>
+
+                <div class="discover-section">
+                    <hr class="my-4">
+                  
+                    
+                </div>
+
+                <div class="explore-products-section mt-4">
+                    
+                </div>
+
+
+                  
+                  {% elif is_cliente %}
+                  
+                    
+              
+
+                  <div class="explore-section">
+                    <p class="lead"> Explora nuestra amplia gama de componentes de alta calidad para armar tu PC perfecta.</p>
+                </div>
+
+                <div class="discover-section">
+                    <hr class="my-4">
+                    <p>Descubre las últimas novedades y encuentra los mejores productos para tus necesidades de rendimiento.</p>
+
+                </div>
+
+                <div class="explore-products-section mt-4">
+                    <a class="btn btn-primary btn-lg" href="{% url 'productos' %}" role="button">Explorar Productos</a>
+                </div>
+
+                <div  class="explore-products-section mt-4">
+
+                    <a class="btn btn-primary btn-lag" href="{% url 'ver_pedidos' %}" role="button">Mis Pedidos</a>
+
+                </div>
+
+                
+
+                  {% elif is_vendedor %}
+                  <div class="explore-section">
+                    <p class="lead">Ten una Buena Jornada Laboral</p>
+                </div>
+
+                <div class="discover-section">
+                    <hr class="my-4">
+                  
+                    
+                </div>
+
+                <div class="explore-products-section mt-4">
+
+
+                    <a class="btn btn-primary" href="{% url 'ver_pedidos_global' %}">Ver Pedidos Global</a>
+
+                    <a class="btn btn-primary" href="{% url 'lista_tarros' %}">Ver Tarros</a>
+
+                    
+                    <a class="btn btn-primary" href="{% url 'crear_tarro' %}">Crear Tarro</a>
+                    
+                    
+                    
+
+                </div>
+
+
+
+                  {% elif is_bodeguero %}
+
+
+                  {% elif is_ensamblador %}
+
+
+                  <a class="btn btn-primary btn-lg" href="{% url 'ver_pedidos_global' %}" role="button">Listar Pedidos</a>
+
+
+
+
+                  
+                  {% elif is_soporte %}
+                  <div class="explore-section">
+                    <p class="lead">Ten una Buena Jornada Laboral</p>
+                </div>
+
+                <div class="discover-section">
+                    <hr class="my-4">
+                  
+                    
+                </div>
+
+                <div class="explore-products-section mt-4"> 
+
+
+                    <a class="btn btn-primary btn-lg" href="{% url 'agregar_version' %}" role="button">Agregar Versiones</a>
+
+                    
+                    <a class="btn btn-primary btn-lg" href="{% url 'lista_versiones' %}" role="button">listar Versiones</a>
+
+
+                    <a class="btn btn-primary btn-lg" href="{% url 'agregar_productos' %}" role="button">Agregar Productos</a>
+
+                    <a class="btn btn-primary btn-lg" href="{% url 'listar_productos' %}" role="button">Listar Productos</a>
+
+                    <a class="btn btn-primary btn-lg" href="{% url 'ver_pedidos_global' %}" role="button">Listar Pedidos</a>
+
+                    <a class="btn btn-primary" href="{% url 'lista_tarros' %}">Ver Tarros</a>
+
+                    
+                    <a class="btn btn-primary" href="{% url 'crear_tarro' %}">Crear Tarro</a>
+
+
+                    <a class="btn btn-primary btn-lg" href="#" role="button">Listar Carrito Armar PC</a>
+
+                    <a class="btn btn-primary btn-lg" href="#" role="button">Listar Carrito Componentes</a>
+
+
+
+
+                    
+
+
+                </div>
+
+                  {% else %}
+
+
+                  <div class="explore-section">
+                    <p class="lead"> Explora nuestra amplia gama de componentes de alta calidad para armar tu PC perfecta.</p>
+                </div>
+
+                <div class="discover-section">
+                    <hr class="my-4">
+                    
+                    <h4>Registrate para comenzar a armar tu pc.</h4>
+
+                </div>
+
+                <div class="explore-products-section mt-4">
+                    <a class="btn btn-primary btn-lg" href="{% url 'registro' %}" role="button">Registrate Ahora</a>
+                </div>
+
+
+                  {% endif %}
+
+                 
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <!-- Contenedor 2 -->
+  <div class="container main-content">
+      <div class="row">
+          {% for p in productos %}
+              <div class="col-md-4">
+                  <div class="feature-box">
+                      {% if p.imagen %}
+                          <img src="{{ p.imagen.url }}" class="img-fluid" alt="{{ p.nombre }}">
+                      {% else %}
+                          <p>No hay imagen disponible</p>
+                          <!-- Puedes mostrar una imagen de marcador de posición aquí -->
+                      {% endif %}
+                      <h3>{{ p.nombre | title }}</h3>
+                      <h5>{{ p.marca }}</h5>
+                      <p class="price">${{ p.precio | intcomma }}</p>
+                      <p>{{ p.descripcion }}</p>
+                      <a href="#" class="btn btn-primary">Ver detalles</a>
+                  </div>
+              </div>
+          {% endfor %}
+      </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'app/base.html' %}
+
+{% block contenido %}
+    <div class="container ver_pedidos">
+        <h2 class="mb-4">Tus Pedidos</h2>
+
+        {% if pedidos %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID Pedido</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col"></th>  <!-- Columna para el botón -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pedido in pedidos %}
+                        <tr>
+                            <td>
+                                <p" class="text-decoration-none">
+                                    {{ pedido.id }}
+                            </p>
+                            </td>
+                            <td>{{ pedido.get_estado_display }}</td>
+                            <td>{{ pedido.fecha_creacion|date:"F d, Y" }}</td>
+                            <td>
+                                <a href="{% url 'detalle_pedido' pedido.id %}" class="btn btn-primary btn-sm">
+                                    Detalle
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No tienes pedidos.</p>
+        {% endif %}
+    </div>
+{% endblock %}

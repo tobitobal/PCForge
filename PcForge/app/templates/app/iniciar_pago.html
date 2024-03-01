@@ -1,0 +1,37 @@
+{% extends 'app/base.html' %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% block contenido %}
+    <div class="container">
+        <br>
+        <div class="card">
+            <div class="card-body">
+                <h1>Confirmar Pago</h1>
+                <ul class="list-group">
+                    {% for categoria, producto in productos_dict.items %}
+                        <li class="list-group-item">
+                            <strong>Producto:</strong> {{ producto.nombre }}<br>
+                            <strong>Precio:</strong> ${{ producto.precio | intcomma }}<br>
+                            <!-- Agrega más detalles según sea necesario -->
+                        </li>
+                    {% endfor %}
+                    <li class="list-group-item">
+                        <strong>Total:</strong> ${{ total_carrito | intcomma }}<br>
+                        <!-- Mostrar el total con IVA -->
+                        <strong>Total con IVA:</strong> ${{ total_con_iva | floatformat:2 }}</p>
+                        
+                        
+                        <!-- Agrega más detalles según sea necesario -->
+                    </li>
+                </ul>
+                
+                <br>
+
+                <div class="text-center">
+                    <button class="btn btn-warning btn-sm">{{ form.render }}</button>
+                    <a href="{% url 'paypal-cancel' %}" class="btn btn-danger">Cancelar Pago</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,42 @@
+<!-- productos_por_categoria.html -->
+
+{% extends 'app/base.html' %}
+{% block contenido %}
+{% load crispy_forms_tags %}
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Productos de la categoría {{ categoria_seleccionada.nombre }}</h2>
+
+  <form method="get" action="{% url 'productos_por_categoria' categoria_id %}">
+    {{ form | crispy }}
+    <button type="submit" class="btn btn-secondary btn-sm">Filtrar</button>
+</form>
+
+
+  {% if productos %}
+    <div class="row">
+      {% for producto in productos %}
+        <div class="col-md-4">
+          <div class="feature-box">
+            {% if producto.imagen %}
+              <img src="{{ producto.imagen.url }}" class="img-fluid" alt="{{ producto.nombre }}" style="height: 200px;">
+            {% else %}
+              <p>No hay imagen disponible</p>
+            {% endif %}
+            <h3>{{ producto.nombre }}</h3>
+            <p class="price">${{ producto.precio }}</p>
+            <p>{{ producto.descripcion |truncatechars:100 }}</p>
+            <a href="{% url 'detalle_producto' producto.id %}" class="btn btn-primary">Ver detalles</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-center">No hay productos en esta categoría.</p>
+  {% endif %}
+
+  <div class="text-center mt-3">
+    <a href="{% url 'home' %}" class="btn btn-primary">Volver al inicio</a>
+  </div>
+</div>
+
+{% endblock %}

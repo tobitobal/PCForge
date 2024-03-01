@@ -1,0 +1,13 @@
+<!-- templates/app/editar_version.html -->
+{% extends 'app/base.html' %}
+{% load crispy_forms_tags %}
+{% block contenido %}
+    <div class="container mt-4">
+        <h2>Editar Versión</h2>
+        <form method="post" action="{% url 'guardar_edicion_version' version.id %}">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        </form>
+    </div>
+{% endblock %}

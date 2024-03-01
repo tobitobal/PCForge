@@ -1,0 +1,43 @@
+{% extends 'app/base.html' %}
+
+{% block contenido %}
+<div class="container pedidos_global">
+    <div class="pedido-background">
+        <h2>Todos los Pedidos</h2>
+        {% if pedidos %}
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID del Pedido</th>
+                        <th>Cliente</th>
+                        <th>Estado</th>
+                        <th>Fecha de Creación</th>
+                        <th>Vendedor Modificador</th>
+                        <th>Fecha de Modificación</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pedido in pedidos %}
+                    <tr>
+                        <td>{{ pedido.id }}</td>
+                        <td>{{ pedido.cliente.username }}</td>
+                        <td>{{ pedido.get_estado_display }}</td>
+                        <td>{{ pedido.fecha_creacion }}</td>
+                        <td>{{ pedido.vendedor.username }}</td>
+                        <td>{{ pedido.fecha_modificacion }}</td>
+                        <td>
+                            <a href="{% url 'detalle_pedido_global' pedido.id %}" class="btn btn-primary btn-sm">Ver Detalles</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p>No hay pedidos.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

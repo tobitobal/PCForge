@@ -1,0 +1,45 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block contenido %}
+<div class="container ver_perfil">
+    <div class="card">
+        <div class="row no-gutters">
+            <div class="col-md-4 d-flex align-items-center">
+                <div class="rounded-circle overflow-hidden mx-auto" style="width: 200px; height: 200px;">
+                    {% if perfil_usuario.imagen_perfil %}
+                    <img src="{{ perfil_usuario.imagen_perfil.url }}" alt="Imagen de perfil" class="img-fluid">
+                    {% else %}
+                    <H3 class="text-center">No hay imagen</H3>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h2 class="card-title">Perfil de {{ perfil_usuario.user.username }}</h2>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p><strong>Nombre:</strong> {{ perfil_usuario.nombre }}</p>
+                            <p><strong>Apellido:</strong> {{ perfil_usuario.apellido }}</p>
+                            <p><strong>Número de Teléfono:</strong> {{ perfil_usuario.numero_telefono }}</p>
+                            <p><strong>Dirección:</strong> {{ perfil_usuario.direccion }}</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p><strong>Fecha de Nacimiento:</strong> {{ perfil_usuario.fecha_nacimiento }}</p>
+                            <p><strong>Género:</strong> {{ perfil_usuario.genero }}</p>
+                            <p><strong>Biografía:</strong> {{ perfil_usuario.biografia }}</p>
+                            <!-- Agrega más campos según sea necesario -->
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="text-right">
+                        <a href="{% url 'modificar_perfil' %}" class="btn btn-primary">Editar Perfil</a>
+                        <!-- Puedes agregar enlaces a otras funcionalidades aquí -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
